@@ -1,0 +1,30 @@
+.container
+  .row
+    .col.s12
+      %h4=link_to 'Tournaments', tournaments_path
+
+  .row
+    .col.s12
+      %table
+        %thead
+          %tr
+            %th Name
+            %th Major
+            %th Fedex Playoff
+            %th
+            %th
+            %th
+
+        %tbody
+          - @tournaments.each do |tournament|
+            %tr
+              %td= tournament.name
+              %td= tournament.major
+              %td= tournament.fedex_playoff
+              %td= link_to 'Show', tournament
+              %td= link_to 'Edit', edit_tournament_path(tournament)
+              %td= link_to 'Destroy', tournament, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  .row
+    .col.s12
+      = link_to 'New Tournament', new_tournament_path, class:"btn"

@@ -1,0 +1,27 @@
+.container
+  .row
+    .col.s12
+      %h4=link_to 'Golfers', golfers_path
+
+  .row
+    .col.s12
+      %table
+        %thead
+          %tr
+            %th First Name
+            %th Last Name
+            %th
+            %th
+            %th
+
+        %tbody
+          - @golfers.each do |golfer|
+            %tr
+              %td= golfer.first_name
+              %td= golfer.last_name
+              %td= link_to 'Show', golfer
+              %td= link_to 'Edit', edit_golfer_path(golfer)
+              %td= link_to 'Destroy', golfer, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  .row
+    .col.s12
+      = link_to 'New Golfer', new_golfer_path, class:"btn"
