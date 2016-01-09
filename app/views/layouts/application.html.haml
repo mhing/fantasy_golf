@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %title Fantasy Golf
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
+    = csrf_meta_tags
+    -# TODO = favicon_link_tag image_path('favicon.ico')
+
+  %body{class:"#{params[:controller]} #{params[:action]}"}
+    -#-if !current_user.present?
+      .body-wrapper
+        = render "layouts/unauthenticated_header"
+        = render "layouts/flash"
+        =yield
+        .push
+      .footer-wrapper
+        = render "layouts/unauthenticated_footer"
+
+    -#-else
+    .body-wapper
+      .navigation-elements
+        =render partial: "layouts/navigation/account_nav"
+        -#-if current_user
+          =render partial: "layouts/navigation/brand_account_nav"
+          =render partial: "layouts/navigation/top_level_navigation"
+      .body-elements#bodyWrapper
+        -# TODO = render "layouts/flash"
+        = yield
+        .push
+    .footer-wrapper
+      .footer-elment

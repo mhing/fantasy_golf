@@ -1,0 +1,18 @@
+.container
+  .row
+    .col.s6
+      %p
+        %b First name:
+        = @golfer.first_name
+
+  .row
+    .col.s6
+      %p
+        %b Last name:
+        = @golfer.last_name
+
+  .row
+    .col.s12
+      = link_to 'Edit', edit_golfer_path(@golfer)
+      \|
+      = link_to 'Back', golfers_path

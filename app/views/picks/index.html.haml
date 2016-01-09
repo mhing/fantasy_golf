@@ -1,0 +1,30 @@
+.container
+  .row
+    .col.s12
+      %h4=link_to 'Picks', picks_path
+
+  .row
+    .col.s12
+      %table
+        %thead
+          %tr
+            %th Golfer
+            %th Tournament
+            %th Winnings
+            %th
+            %th
+            %th
+
+        %tbody
+          - @picks.each do |pick|
+            %tr
+              %td= pick.golfer
+              %td= pick.tournament
+              %td= pick.winnings
+              %td= link_to 'Show', pick
+              %td= link_to 'Edit', edit_pick_path(pick)
+              %td= link_to 'Destroy', pick, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  .row
+    .col.s12
+      = link_to 'New Pick', new_pick_path, class:"btn"

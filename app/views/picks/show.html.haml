@@ -1,0 +1,28 @@
+.container
+  .row
+    .col.s6
+      %p
+        %b Golfer:
+        = @pick.golfer
+
+  .row
+    .col.s6
+      %p
+        %b Tournament:
+        = @pick.tournament
+
+  .row
+    .col.s6
+      %p
+        %b Winnings:
+        = @pick.winnings
+
+  .row
+    .col.s6
+      %p
+        %b Date:
+        = @pick.date
+
+= link_to 'Edit', edit_pick_path(@pick)
+\|
+= link_to 'Back', picks_path
