@@ -1,0 +1,2 @@
+class FedExWinnerPerformance < HistoricalPerformance
+end

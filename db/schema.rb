@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160107045921) do
+ActiveRecord::Schema.define(version: 20160109225109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20160107045921) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "historical_performances", force: :cascade do |t|
+    t.integer  "place"
+    t.decimal  "winnings"
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date     "date"
+  end
+
   create_table "picks", force: :cascade do |t|
     t.integer  "golfer_id"
     t.integer  "tournament_id"
@@ -30,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160107045921) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.date     "date"
+    t.boolean  "backup"
   end
 
   add_index "picks", ["golfer_id"], name: "index_picks_on_golfer_id", using: :btree
@@ -41,6 +51,7 @@ ActiveRecord::Schema.define(version: 20160107045921) do
     t.boolean  "fedex_playoff"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.boolean  "active",        default: true
   end
 
   add_foreign_key "picks", "golfers"
