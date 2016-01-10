@@ -15,16 +15,22 @@ class PicksController < ApplicationController
   # GET /picks/new
   def new
     @pick = Pick.new
+    @tournaments = Tournament.all.order(:name)
   end
 
   # GET /picks/1/edit
   def edit
+    #@pick = Pick.find(:id)
+    #@tournaments = Tournament.all.order(:name)
   end
 
   # POST /picks
   # POST /picks.json
   def create
+    golfer = Golfer.find_or_initialize_by(golfer_params)
     @pick = Pick.new(pick_params)
+    # TODO allow you to create or select golfer from dropdown
+    @pick.golfer = golfer
 
     respond_to do |format|
       if @pick.save
@@ -69,6 +75,10 @@ class PicksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pick_params
-      params.require(:pick).permit(:golfer_id, :tournament_id, :winnings)
+      params.require(:pick).permit(:golfer_id, :tournament_id)
+    end
+
+    def golfer_params
+      params.require(:golfer).permit(:first_name, :last_name)
     end
 end

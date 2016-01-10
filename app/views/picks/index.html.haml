@@ -11,19 +11,13 @@
             %th Golfer
             %th Tournament
             %th Winnings
-            %th
-            %th
-            %th
 
         %tbody
           - @picks.each do |pick|
             %tr
-              %td= pick.golfer
-              %td= pick.tournament
+              %td= pick.golfer.display_name
+              %td= pick.tournament.name
               %td= pick.winnings
-              %td= link_to 'Show', pick
-              %td= link_to 'Edit', edit_pick_path(pick)
-              %td= link_to 'Destroy', pick, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
   .row
     .col.s12

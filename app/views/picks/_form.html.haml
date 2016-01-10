@@ -1,19 +1,32 @@
 = form_for @pick do |f|
+  =f.hidden_field :date, :value => Date.today
   - if @pick.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@pick.errors.count, "error")} prohibited this pick from being saved:"
-      %ul
-        - @pick.errors.full_messages.each do |msg|
-          %li= msg
+    .row
+      .col.s12
+        #error_explanation
+          %h2= "#{pluralize(@pick.errors.count, "error")} prohibited this pick from being saved:"
+          %ul
+            - @pick.errors.full_messages.each do |msg|
+              %li= msg
 
-  .field
-    = f.label :golfer
-    = f.text_field :golfer
-  .field
-    = f.label :tournament
-    = f.text_field :tournament
-  .field
-    = f.label :winnings
-    = f.text_field :winnings
-  .actions
-    = f.submit 'Save'
+  .row
+    .col.s8
+      .row
+        -# TODO allow you to create or select golfer from dropdown
+        =fields_for :golfer, @pick.golfer do |golfer_fields|
+          .col.s6
+            .input-field
+              = golfer_fields.text_field :first_name
+              = golfer_fields.label :first_name
+          .col.s6
+            .input-field
+              = golfer_fields.text_field :last_name
+              = golfer_fields.label :last_name
+    .col.s4.input-field
+      =f.select :tournament_id, options_for_select(@tournaments.map{|t| [t.name, t.id]}), {}, class:'browser-default'
+
+  .row
+    .col.s6.offset-s6
+      .actions.right
+        = link_to 'Back', picks_path
+        = f.submit 'Save', class:"btn"

@@ -1,11 +1,73 @@
 .container
   .row
-    .col.s4
-      =render file: 'golfers/index'
+    .col.s12
+      %p Current Picks broken out by pick set and with backupsw/ daily performance. Will be a table, each row is a pick set
+      %table
+        %tr
+          %th Pick Set
+          %th Tournament
+          %th Pick
+          %th Current Standings
+        %tr
 
-    .col.s4
+  .row
+    .col.s12
+      %p Current progress vs personal historical progress
+      %table
+        %tr
+          %th
+          %th Total
+          %th Majors
+          %th FedEx Playoffs
+          %th Cuts Mads
+        %tr
+          %th 2014
+
+        %tr
+          %th 2015
+
+        %tr
+          %th 2016-1
+
+        %tr
+          %th 2016-2
+
+  .row
+    .col.s12
+      %p Historical winner performance tracker, all years
+      %table
+        %tr
+          %th
+          %th 2014
+          %th 2015
+          %th 2016
+        %tr
+          -test = HistoricalPerformance.find(44)
+          %th=test.title
+          %td=number_to_currency(test.winnings, :precision => 0)
+
+        %tr
+          %th 2nd Place
+
+        %tr
+          %th 3rd Place
+
+        %tr
+          %th 4th Place
+
+        %tr
+          %th Majors
+
+        %tr
+          %th FedEx Playoffs
+
+        %tr
+          %th Cuts Made
+
+  .row
+    .col.s6
       =render file: 'tournaments/index'
 
-    .col.s4
+    .col.s6
       =render file: 'picks/index'
 
