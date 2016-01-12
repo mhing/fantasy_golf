@@ -15,7 +15,7 @@ class PicksController < ApplicationController
   # GET /picks/new
   def new
     @pick = Pick.new
-    @tournaments = Tournament.all.order(:name)
+    @tournaments = Tournament.all.ordered
   end
 
   # GET /picks/1/edit
@@ -68,17 +68,18 @@ class PicksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_pick
-      @pick = Pick.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def pick_params
-      params.require(:pick).permit(:golfer_id, :tournament_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_pick
+    @pick = Pick.find(params[:id])
+  end
 
-    def golfer_params
-      params.require(:golfer).permit(:first_name, :last_name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def pick_params
+    params.require(:pick).permit(:golfer_id, :tournament_id, :date, :backup)
+  end
+
+  def golfer_params
+    params.require(:golfer).permit(:first_name, :last_name)
+  end
 end

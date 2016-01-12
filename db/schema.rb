@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109225109) do
+ActiveRecord::Schema.define(version: 20160112031810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160109225109) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.date     "date"
-    t.boolean  "backup"
+    t.boolean  "backup",        default: false
   end
 
   add_index "picks", ["golfer_id"], name: "index_picks_on_golfer_id", using: :btree
@@ -52,6 +52,9 @@ ActiveRecord::Schema.define(version: 20160109225109) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.boolean  "active",        default: true
+    t.integer  "position"
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   add_foreign_key "picks", "golfers"

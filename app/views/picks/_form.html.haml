@@ -10,7 +10,7 @@
               %li= msg
 
   .row
-    .col.s8
+    .col.s6
       .row
         -# TODO allow you to create or select golfer from dropdown
         =fields_for :golfer, @pick.golfer do |golfer_fields|
@@ -22,8 +22,12 @@
             .input-field
               = golfer_fields.text_field :last_name
               = golfer_fields.label :last_name
-    .col.s4.input-field
+    .col.s3.input-field
       =f.select :tournament_id, options_for_select(@tournaments.map{|t| [t.name, t.id]}), {}, class:'browser-default'
+
+    .col.s3.input-field
+      = f.check_box :backup, {}, true
+      = f.label :backup
 
   .row
     .col.s6.offset-s6

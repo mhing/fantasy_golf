@@ -9,6 +9,7 @@
         %thead
           %tr
             %th Name
+            %th Position
 
         %tbody
           - @tournaments.each do |tournament|
@@ -16,6 +17,7 @@
               -major = tournament.major
               -fedex = tournament.fedex_playoff
               %td{class:"#{major ? 'major' : (fedex ? 'fedex' : '')}"}= tournament.name
+              %td= tournament.position
 
   .row
     .col.s12

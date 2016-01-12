@@ -4,7 +4,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments
   # GET /tournaments.json
   def index
-    @tournaments = Tournament.all
+    @tournaments = Tournament.all.ordered
   end
 
   # GET /tournaments/1
@@ -59,6 +59,21 @@ class TournamentsController < ApplicationController
       format.html { redirect_to tournaments_url, notice: 'Tournament was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def edit_position
+    @tournaments = Tournament.all.ordered
+  end
+
+  def update_position
+    params.require(:tournament_positions)
+    params[:tournament_positions].each do |elem|
+      t = Tournament.find(elem["id"])
+      t.position = elem["position"]
+      t.save!
+    end
+
+    redirect_to :tournaments
   end
 
   private

@@ -1,7 +1,15 @@
-%h1 Editing pick
+.container
+  =form_for @pick do |f|
+    .row.valign-wrapper
+      .col.s3
+        -if @pick.backup
+          %span.bold Backup
+        %p=@pick.golfer.display_name
 
-= render 'form'
+      .col.s3.input-field
+        =f.number_field :winnings
+        =f.label :winnings
 
-= link_to 'Show', @pick
-\|
-= link_to 'Back', picks_path
+      .col.s3
+        =f.submit 'Save Winnings', class:"btn"
+

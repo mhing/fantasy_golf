@@ -1,0 +1,25 @@
+.container
+  .row
+    .col.s12
+      %h4 Edit Tournament Positions
+
+  =form_tag update_position_tournaments_path do
+    .row
+      -tournament_count = @tournaments.size
+      -@tournaments.each do |t|
+        .col.s6
+          =hidden_field_tag 'tournament_positions[][id]', t.id
+          -major = t.major
+          -fedex = t.fedex_playoff
+          %span{class:"#{major ? 'major' : (fedex ? 'fedex' : '')}"}=t.name
+
+        .col.s2
+          %select.browser-default{name: 'tournament_positions[][position]'}
+            -(1..tournament_count).to_a.each do |pos|
+              -is_selected = t.position == pos
+              %option{value:pos, selected:is_selected}=pos
+
+    .row
+      .col.s12
+        =submit_tag 'Save', class:"btn"
+

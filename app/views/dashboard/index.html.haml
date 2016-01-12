@@ -36,33 +36,19 @@
     .col.s12
       %p Historical winner performance tracker, all years
       %table
+        -years = supported_years
         %tr
           %th
-          %th 2014
-          %th 2015
-          %th 2016
-        %tr
-          -test = HistoricalPerformance.find(44)
-          %th=test.title
-          %td=number_to_currency(test.winnings, :precision => 0)
+          -years.each do |y|
+            %th=y
 
-        %tr
-          %th 2nd Place
-
-        %tr
-          %th 3rd Place
-
-        %tr
-          %th 4th Place
-
-        %tr
-          %th Majors
-
-        %tr
-          %th FedEx Playoffs
-
-        %tr
-          %th Cuts Made
+        -years.each do |y|
+          -if @historical_performances[y]
+            -@historical_performances[y].each do |year_perfs|
+              -year_perfs.each do |perf|
+                %tr
+                  %th=perf.title
+                  %td=number_to_currency(perf.winnings, :precision => 0)
 
   .row
     .col.s6

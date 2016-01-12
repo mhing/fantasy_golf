@@ -17,7 +17,10 @@
             %tr
               %td= pick.golfer.display_name
               %td= pick.tournament.name
-              %td= pick.winnings
+              -if pick.winnings
+                %td= pick.winnings
+              -else
+                %td=link_to "Add Winnings", edit_pick_path(pick), class:"btn"
 
   .row
     .col.s12

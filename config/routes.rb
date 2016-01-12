@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   resources :picks
-  resources :tournaments
+  resources :tournaments do
+    collection do
+      get 'edit_position'
+      post 'update_position'
+    end
+  end
   resources :golfers
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
